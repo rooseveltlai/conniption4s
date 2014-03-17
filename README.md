@@ -53,76 +53,94 @@ The [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/ma
 
 Access your TradeKing account
 
-      val srv: ConniptionService = new ConniptionService
-      val acc: Account = srv.getAccount("<accid>")
-      //OR
-      val accounts: Set[Account] = srv.getAccounts
+```scala
+val srv: ConniptionService = new ConniptionService
+val acc: Account = srv.getAccount("<accid>")
+//OR
+val accounts: Set[Account] = srv.getAccounts
+      
+```
 
 Access account values
 
-      acc.id -> "1234567"
-      acc.value -> 0.0
-      acc.fedcall -> 0.0
-      acc.housecall -> 0.0
-      
+```scala
+acc.id -> "1234567"
+acc.value -> 0.0
+acc.fedcall -> 0.0
+acc.housecall -> 0.0
+```
 Access account buying power
 
-      val power: BuyingPower = acc.buyingPower
-      power.cashAvailableForWithdrawl -> 0.0
-      power.dayTrading -> 0.0
-      power.equityPercentage -> 0.0
-      power.options -> 0.0
-      power.dayStartDayTrading -> 0.0
-      power.dayStartStock -> 0.0
-      power.stock -> 0.0
+```scala
+val power: BuyingPower = acc.buyingPower
+power.cashAvailableForWithdrawl -> 0.0
+power.dayTrading -> 0.0
+power.equityPercentage -> 0.0
+power.options -> 0.0
+power.dayStartDayTrading -> 0.0
+power.dayStartStock -> 0.0
+power.stock -> 0.0
+```
 
 Access account funds
 
-      val funds: Funds = acc.funds
-      funds.accruedInterest -> 0.0
-      funds.cashTotal -> 0.0
-      funds.cashAvailable -> 0.0
-      funds.marginBalance -> 0.0
-      funds.moneyMarketFundBalance -> 0.0
-      funds.total -> 0.0
-      funds.uncleareedDeposits -> 0.0
-      funds.unsettled -> 0.0
-      funds.fundsYield  -> 0.0
+```scala
+val funds: Funds = acc.funds
+funds.accruedInterest -> 0.0
+funds.cashTotal -> 0.0
+funds.cashAvailable -> 0.0
+funds.marginBalance -> 0.0
+funds.moneyMarketFundBalance -> 0.0
+funds.total -> 0.0
+funds.uncleareedDeposits -> 0.0
+funds.unsettled -> 0.0
+ funds.fundsYield  -> 0.0
+```
       
 ... And so on for Holdings and Securities
 
 Search News
 
-      val keywords = Set("debt")
-      val symbols = Set("APPL") //optional
-      val maxhits = 10 //optional 
-      val articles: Set[ArticleId]srv.searchNews(keywords,symbols,maxhits) -> Set[ArticleId]
+```scala
+val keywords = Set("debt")
+val symbols = Set("APPL") //optional
+val maxhits = 10 //optional 
+val articles: Set[ArticleId]srv.searchNews(keywords,symbols,maxhits) -> Set[ArticleId]
+```
 
 Inflate a News Article
 
-      articles.foreach {
-         id: ArticleId =>
-            srv.news(id)
-      }
+```scala
+articles.foreach {
+   id: ArticleId =>
+      srv.news(id)
+}
+```
 
 Get Member Profile Info
 
-      val pro: Profile = srv.profile
-      pro.id -> "1234567"
-      pro.fundtrading -> true
-      pro.ira -> false
-      pro.marginTrading -> false
-      pro.nickName -> "Individual Account"
+```scala
+val pro: Profile = srv.profile
+pro.id -> "1234567"
+pro.fundtrading -> true
+pro.ira -> false
+pro.marginTrading -> false
+pro.nickName -> "Individual Account"
       ....
+```
 
 Get Quotes
 
-      val symbols: Set[String] = Set("IBM")
-      val quotes: Set[Quote] = srv.quotes(symbols)
+```scala
+val symbols: Set[String] = Set("IBM")
+val quotes: Set[Quote] = srv.quotes(symbols)
+```
    
 Get History
 
-      val hist :Seq[Transactions] = srv.history("1234567")
+```scala
+val hist :Seq[Transactions] = srv.history("1234567")
+```
    
 .... Plus many more! Checkout the TradeKing documentation, I've implemented what is reasonable...
 
