@@ -49,8 +49,84 @@ I'm still new to SBT and deploying scala projects to maven central, check back w
 
 The [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/ConniptionService.scala) is your goto for access to the TradeKing API. Most methods will return a single, sequence or set of given model elements defined beloy
 
+#### Examples
 
-#### [Models](https://github.com/Ccook/conniption4s/tree/master/src/main/scala/com/celexus/conniption/model)
+Access your TradeKing account
+
+      val srv: ConniptionService = new ConniptionService
+      val acc: Account = srv.getAccount("<accid>")
+      //OR
+      val accounts: Set[Account] = srv.getAccounts
+
+Access account values
+
+      acc.id -> "1234567"
+      acc.value -> 0.0
+      acc.fedcall -> 0.0
+      acc.housecall -> 0.0
+      
+Access account buying power
+
+      val power: BuyingPower = acc.buyingPower
+      power.cashAvailableForWithdrawl -> 0.0
+      power.dayTrading -> 0.0
+      power.equityPercentage -> 0.0
+      power.options -> 0.0
+      power.dayStartDayTrading -> 0.0
+      power.dayStartStock -> 0.0
+      power.stock -> 0.0
+
+Access account funds
+
+      val funds: Funds = acc.funds
+      funds.accruedInterest -> 0.0
+      funds.cashTotal -> 0.0
+      funds.cashAvailable -> 0.0
+      funds.marginBalance -> 0.0
+      funds.moneyMarketFundBalance -> 0.0
+      funds.total -> 0.0
+      funds.uncleareedDeposits -> 0.0
+      funds.unsettled -> 0.0
+      funds.fundsYield  -> 0.0
+      
+... And so on for Holdings and Securities
+
+Search News
+
+      val keywords = Set("debt")
+      val symbols = Set("APPL") //optional
+      val maxhits = 10 //optional 
+      val articles: Set[ArticleId]srv.searchNews(keywords,symbols,maxhits) -> Set[ArticleId]
+
+Inflate a News Article
+
+      articles.foreach {
+         id: ArticleId =>
+            srv.news(id)
+      }
+
+Get Member Profile Info
+
+      val pro: Profile = srv.profile
+      pro.id -> "1234567"
+      pro.fundtrading -> true
+      pro.ira -> false
+      pro.marginTrading -> false
+      pro.nickName -> "Individual Account"
+      ....
+
+Get Quotes
+
+      val symbols: Set[String] = Set("IBM")
+      val quotes: Set[Quote] = srv.quotes(symbols)
+   
+Get History
+
+      val hist :Seq[Transactions] = srv.history("1234567")
+   
+.... Plus many more! Checkout the TradeKing documentation, I've implemented what is reasonable...
+
+##### [Models](https://github.com/Ccook/conniption4s/tree/master/src/main/scala/com/celexus/conniption/model)
 
 * [Account](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Account.scala)
    * [BuyingPower](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/BuyingPower.scala)
