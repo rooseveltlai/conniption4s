@@ -44,3 +44,23 @@ Use the maven clean install directive to compile and make sure everythng works. 
 I'm still new to SBT and deploying scala projects to maven central, check back when I get this sorted!
 
 ## Usage
+
+### [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/ConniptionService.scala)
+
+The [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/ConniptionService.scala) is your goto for access to the TradeKing API. Most methods will return a single, sequence or set of given model elements defined beloy
+
+
+#### [Models](https://github.com/Ccook/conniption4s/tree/master/src/main/scala/com/celexus/conniption/model)
+
+* [Account](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Account.scala)
+   * [BuyingPower](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/BuyingPower.scala)
+   * [Funds](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Funds.scala)
+   * [Holding](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Holding.scala)
+   * [Securities](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Securities.scala)
+* [Article](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Article.scala) / [ArticleId](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/ArticleId.scala)
+* [Order](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Order.scala)
+* [Profile](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Profile.scala)
+* [Quote](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Quote.scala)
+* [Transaction](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Transaction.scala)
+
+
