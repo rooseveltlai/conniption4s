@@ -58,7 +58,6 @@ val srv: ConniptionService = new ConniptionService
 val acc: Account = srv.getAccount("<accid>")
 //OR
 val accounts: Set[Account] = srv.getAccounts
-      
 ```
 
 Access account values
@@ -94,7 +93,7 @@ funds.moneyMarketFundBalance -> 0.0
 funds.total -> 0.0
 funds.uncleareedDeposits -> 0.0
 funds.unsettled -> 0.0
- funds.fundsYield  -> 0.0
+funds.fundsYield  -> 0.0
 ```
       
 ... And so on for Holdings and Securities
