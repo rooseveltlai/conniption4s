@@ -138,5 +138,19 @@ Get History
 * [Profile](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Profile.scala)
 * [Quote](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Quote.scala)
 * [Transaction](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Transaction.scala)
+* 
+## License, Attribution, etc
+
+
+Conniption is licensed under the Apache License, version 2. It is in no way associated with TradeKing or TradeKing Group, Inc.
+
+Please read TradeKing's documentation carefully! Use only as they suggest.
+
+
+I use [scribe-java](https://github.com/fernandezpablo85/scribe-java) for OAuth. It's an awesome project. I recommend you check it out.
+
+
+![Powered by TradeKing](https://developers.tradeking.com/images/logos/PB-TK-small-Blue.gif)
+
 
 
