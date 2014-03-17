@@ -143,7 +143,7 @@ val hist :Seq[Transactions] = srv.history("1234567")
    
 .... Plus many more! Checkout the TradeKing documentation, I've implemented what is reasonable...
 
-##### [Models](https://github.com/Ccook/conniption4s/tree/master/src/main/scala/com/celexus/conniption/model)
+## [Models](https://github.com/Ccook/conniption4s/tree/master/src/main/scala/com/celexus/conniption/model)
 
 * [Account](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Account.scala)
    * [BuyingPower](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/BuyingPower.scala)
@@ -156,6 +156,10 @@ val hist :Seq[Transactions] = srv.history("1234567")
 * [Quote](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Quote.scala)
 * [Transaction](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Transaction.scala)
 
+## TODO
+
+* Tests!
+* Quote, FIXML Building
 
 ## License, Attribution, etc
 
