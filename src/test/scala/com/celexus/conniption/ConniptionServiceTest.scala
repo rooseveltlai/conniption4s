@@ -42,15 +42,15 @@ class ConniptionServiceTest extends AssertionsForJUnit {
     assertValued("Histories", histories)
     histories.foreach {
       t: Transaction =>
-        assertValued("", t.activity)
-        assertValued("", t.amount)
-        assertValued("", t.comission)
-        assertValued("", t.date)
-        assertValued("", t.description)
-        assertValued("", t.fee)
-        assertValued("", t.price)
-        assertValued("", t.quantity)
-        assertValued("", t.secfee)
+        assertValued("Histories Activity", t.activity)
+        assertValued("Histories Amouunt", t.amount)
+        assertValued("Histories Commission", t.comission)
+        assertValued("Histories Date", t.date)
+        assertValued("Histories Description", t.description)
+        assertValued("Histories Fee", t.fee)
+        assertValued("Histories Price", t.price)
+        assertValued("Histories Quantity", t.quantity)
+        assertValued("Histories Sec Fee", t.secfee)
     }
   }
 
@@ -59,17 +59,17 @@ class ConniptionServiceTest extends AssertionsForJUnit {
     assertValued("", holdings)
     holdings.foreach {
       h: Holding =>
-        assertValued("", h.assetClass)
-        assertValued("", h.costBasis)
-        assertValued("", h.description)
-        assertValued("", h.gainLoss)
-        assertValued("", h.holdingType)
-        assertValued("", h.marketValue)
-        assertValued("", h.marketValueChange)
-        assertValued("", h.price)
-        assertValued("", h.purchasePrice)
-        assertValued("", h.quanity)
-        assertValued("", h.symbol)
+        assertValued("Holding Asset Clss", h.assetClass)
+        assertValued("Holding Cost Basis", h.costBasis)
+        assertValued("Holding Description", h.description)
+        assertValued("Holding gain/loss", h.gainLoss)
+        assertValued("Holding Type", h.holdingType)
+        assertValued("Holding Market Value", h.marketValue)
+        assertValued("Holding Market Value Change", h.marketValueChange)
+        assertValued("Holding Price", h.price)
+        assertValued("Holding Purchase Price", h.purchasePrice)
+        assertValued("Holding Quantity", h.quanity)
+        assertValued("Holding Symbol", h.symbol)
     }
   }
 
@@ -82,67 +82,67 @@ class ConniptionServiceTest extends AssertionsForJUnit {
     }
   }
 
-  @Test def clock = assertValued("", srv.clock)
+  @Test def clock = assertValued("Market Clock", srv.clock)
 
   @Test def quotes = {
     val qs: Set[Quote] = srv.quotes(Set("IBM"))
     assertValued("", qs)
     qs.foreach {
       q: Quote =>
-        assertValued("", q.annualDividend)
-        assertValued("", q.ask)
-        assertValued("", q.askSize)
-        assertValued("", q.askTime)
-        assertValued("", q.avg100Day)
-        assertValued("", q.avg200Day)
-        assertValued("", q.avg21Volume)
-        assertValued("", q.avg30Volume)
-        assertValued("", q.avg50Day)
-        assertValued("", q.avg90Volumne)
-        assertValued("", q.beta)
-        assertValued("", q.bid)
-        assertValued("", q.bidSize)
-        assertValued("", q.bidTick)
-        assertValued("", q.bidTime)
-        assertValued("", q.bookValue)
-        assertTrue("", q.canTrade)
-        assertValued("", q.change)
-        assertValued("", q.changeSign)
-        assertValued("", q.changeText)
-        assertValued("", q.close)
-        assertValued("", q.cusip)
-        assertValued("", q.date)
-        assertValued("", q.divexdate)
+        assertValued("Quote Annual Dividend", q.annualDividend)
+        assertValued("Quote Ask", q.ask)
+        assertValued("Quote Ask Size", q.askSize)
+        assertValued("Quote Ask Time", q.askTime)
+        assertValued("Quote Avg 100 Day", q.avg100Day)
+        assertValued("Quote Avg 200 Day", q.avg200Day)
+        assertValued("Quote Avg 21 Vol", q.avg21Volume)
+        assertValued("Quote Avg 30 Volume", q.avg30Volume)
+        assertValued("Quote Avg 50 Day", q.avg50Day)
+        assertValued("Quote Avg 90 Vol", q.avg90Volumne)
+        assertValued("Quote Beta", q.beta)
+        assertValued("Quote Bid", q.bid)
+        assertValued("Quote Bid Size", q.bidSize)
+        assertValued("Quote Bid Tick", q.bidTick)
+        assertValued("Quote Bid Time", q.bidTime)
+        assertValued("Quote Book Value", q.bookValue)
+        assertTrue("Quote Can Trade", q.canTrade)
+        assertValued("Quote Change", q.change)
+        assertValued("Quote Change Sign", q.changeSign)
+        assertValued("Quote Change Text", q.changeText)
+        assertValued("Quote Close", q.close)
+        assertValued("Quote Cusip", q.cusip)
+        assertValued("Quote Date", q.date)
+        assertValued("Quote Divexdate", q.divexdate)
     }
   }
 
   @Test def timesales = {
     val sales: Seq[Quote] = srv.timesales(Set("IBM"))
-    assertValued("", sales)
+    assertValued("Timesales", sales)
     sales.foreach {
       q: Quote =>
-        assertValued("", q)
+        assertValued("Timesales Quote", q)
     }
   }
 
   @Test def list = {
     val l: Seq[Quote] = srv.list()
-    assertValued("", l)
+    assertValued("List", l)
     l.foreach {
       q: Quote =>
-        assertValued("", q)
+        assertValued("List Quote", q)
     }
   }
 
   @Test def profile = {
     val p: Profile = srv.profile
-    assertValued("", p)
-    assertTrue(!p.disabled)
-    assertTrue(p.fundtrading)
-    assertTrue(p.stockTrading)
+    assertValued("Profile", p)
+    assertTrue("Profile Disabled", !p.disabled)
+    assertTrue("Profile Fund Trading", p.fundtrading)
+    assertTrue("Profile Stock Trading", p.stockTrading)
   }
 
-  @Test def version = assertEquals(srv.version, "1.0-RC1")
+  @Test def version = assertEquals("Version", srv.version, "1.0-RC1")
 
   private def assertValued(err: String, a: Any) = {
     assertNotNull(err + " (is null)", a)
