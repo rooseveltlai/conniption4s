@@ -116,6 +116,34 @@ class ConniptionServiceTest extends AssertionsForJUnit {
     }
   }
 
+  @Test def timesales = {
+    val sales: Seq[Quote] = srv.timesales(Set("IBM"))
+    assertValued("", sales)
+    sales.foreach {
+      q: Quote =>
+        assertValued("", q)
+    }
+  }
+
+  @Test def list = {
+    val l: Seq[Quote] = srv.list()
+    assertValued("", l)
+    l.foreach {
+      q: Quote =>
+        assertValued("", q)
+    }
+  }
+
+  @Test def profile = {
+    val p: Profile = srv.profile
+    assertValued("", p)
+    assertTrue(!p.disabled)
+    assertTrue(p.fundtrading)
+    assertTrue(p.stockTrading)
+  }
+
+  @Test def version = assertEquals(srv.version, "1.0-RC1")
+
   private def assertValued(err: String, a: Any) = {
     assertNotNull(err + " (is null)", a)
     assertTrue(err + " (is empty)", a.toString nonEmpty)
