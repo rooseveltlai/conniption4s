@@ -22,6 +22,6 @@ object ConniptionConstants {
 
   val API_KEY: String = System.getenv("API_KEY")
   val API_SECRET: String = System.getenv("API_SECRET")
-  val ACCESS_TOKE: String = System.getenv("ACCESS_TOKEN")
-  val ACCESN_TOKEN_SECRET: String = System.getenv("ACCESS_TOKEN_SECRET")
+  val ACCESS_TOKEN: String = System.getenv("ACCESS_TOKEN")
+  val ACCESS_TOKEN_SECRET: String = System.getenv("ACCESS_TOKEN_SECRET")
 }

@@ -29,7 +29,7 @@ class TKService {
    * The Auth Token
    * @return
    */
-  def token: Token = new Token(ConniptionConstants.ACCESS_TOKE, ConniptionConstants.ACCESN_TOKEN_SECRET)
+  def token: Token = new Token(ConniptionConstants.ACCESS_TOKEN, ConniptionConstants.ACCESS_TOKEN_SECRET)
 
   /**
    * The Authorization URL
