@@ -75,6 +75,15 @@ class ConniptionService(format: String = "xml") {
     }.head._2
   }
 
+  def histories(range: String = "all", transactions: String = "all"): Set[Transaction] = {
+    var histories: Set[Transaction] = Set()
+    accounts.foreach {
+      a: Account =>
+        histories = histories ++ history(a.id, range, transactions)
+    }
+    histories
+  }
+
   /**
    * Access to previous transactions
    * @param id The account Id
@@ -89,6 +98,15 @@ class ConniptionService(format: String = "xml") {
       n: NodeSeq => transacts += new Transaction(n)
     }
     transacts
+  }
+
+  def holdings: Set[Holding] = {
+    var holds: Set[Holding] = Set()
+    accounts.foreach {
+      a: Account =>
+        holds = holds ++ holdings(a.id)
+    }
+    holds
   }
 
   /**
@@ -106,6 +124,15 @@ class ConniptionService(format: String = "xml") {
     holdings
   }
 
+  def orders: Set[Order] = {
+    var ords: Set[Order] = Set()
+    accounts.foreach {
+      a: Account =>
+        ords = ords++ orders(a.id)
+    }
+    ords
+  }
+
   /**
    * Access to previous Orders
    * @param id Account Id
@@ -113,7 +140,6 @@ class ConniptionService(format: String = "xml") {
    */
   def orders(id: String): Set[Order] = {
     val xml: Node = XML.loadString(tk.request(Verb.GET, buildURL("accounts/___/orders", id)).getBody)
-    println(xml)
     val orderXML: NodeSeq = (xml \ "orderstatus" \ "order")
     var orders = Set[Order]()
     orderXML.foreach {
@@ -185,7 +211,6 @@ class ConniptionService(format: String = "xml") {
     if (startdate nonEmpty) params += ("startdate" -> startdate)
     if (enddate nonEmpty) params += ("enddate" -> enddate)
     val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("market/news/search"), params).getBody)
-    println(xml)
     var articleIds: Set[ArticleId] = Set()
     val idsXML: NodeSeq = (xml \ "articles" \ "article")
     idsXML.foreach {
