@@ -17,13 +17,14 @@ package com.celexus.conniption
 
 import org.scribe.builder._
 import org.scribe.oauth.OAuthService
-import org.scribe.model.{Response, OAuthRequest, Verb, Token}
+import org.scribe.model._
 
 /**
  * A Helper class to perform OAuth transactions to Tradeking (TradeKingAPI is in src/java)
  */
 class TKService {
-  val service: OAuthService = new ServiceBuilder().provider(new TradeKingAPI().getClass).apiKey(ConniptionConstants.API_KEY).apiSecret(ConniptionConstants.API_SECRET).build()
+  val service: OAuthService = new ServiceBuilder().provider(new TradeKingAPI().getClass)
+    .apiKey(ConniptionConstants.API_KEY).apiSecret(ConniptionConstants.API_SECRET).signatureType(SignatureType.Header).build()
 
   /**
    * The Auth Token
@@ -51,6 +52,7 @@ class TKService {
     if (!payload.eq(null)) {
       req.addHeader("Content-Length", payload.length.toString)
       req.addHeader("Content-Type", "text/xml")
+      req.addHeader("TKI_OVERRIDE","true")
       req.addPayload(payload)
     }
     service.signRequest(token, req)

@@ -172,6 +172,7 @@ class ConniptionService(format: String = "xml") {
    */
   def placePreview(id: String, fixml: String): TKResponse = {
     val res: Response = tk.request(Verb.POST, buildURL("accounts/___/orders/preview", id), payload = fixml)
+    println(res.getBody)
     new TKResponse(XML.loadString(res.getBody), res)
   }
 
