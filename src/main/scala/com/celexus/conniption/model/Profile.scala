@@ -21,7 +21,7 @@ import scala.xml.NodeSeq
  * Model representing a TradeKing profile
  * @param xml Underlying format, default XML
  */
-class Profile(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class Profile(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   def id: String = ends("/userdata/account/account")
 

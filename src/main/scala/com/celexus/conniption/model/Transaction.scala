@@ -22,7 +22,7 @@ import java.text.{SimpleDateFormat, DateFormat}
  * Model representing a Transaction for History
  * @param xml Underlying format, default XML
  */
-class Transaction(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class Transaction(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   def activity: String = ends("transaction/activity")
 

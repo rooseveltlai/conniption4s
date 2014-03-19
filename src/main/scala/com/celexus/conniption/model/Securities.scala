@@ -21,7 +21,7 @@ import scala.xml.NodeSeq
  * Model representing an Account's generalizations for Securities
  * @param xml
  */
-class Securities(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class Securities(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   def longOptions: Double = toDouble(ends("securities/longoptions"))
 

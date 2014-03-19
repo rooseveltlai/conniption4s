@@ -21,7 +21,7 @@ import scala.xml._
  * Model for TradeKing Accounts
  * @param xml underlying format to use, by default XML
  */
-class Account(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class Account(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   /**
    * @return The ID of this Account
@@ -38,7 +38,7 @@ class Account(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
    */
   def buyingPower: BuyingPower = {
     val buyingPowerXML: NodeSeq = (xml \ "accountbalance" \ "buyingpower")
-    new BuyingPower(buyingPowerXML)
+    new BuyingPower(buyingPowerXML,res)
   }
 
   /**
@@ -58,7 +58,7 @@ class Account(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
    */
   def funds: Funds = {
     val moneyXML: NodeSeq = (xml \ "accountbalance" \ "money")
-    new Funds(moneyXML)
+    new Funds(moneyXML,res)
   }
 
   /**
@@ -66,7 +66,7 @@ class Account(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
    */
   def securities: Securities = {
     val securitiesXML: NodeSeq = (xml \ "accountbalance" \ "securities")
-    new Securities(securitiesXML)
+    new Securities(securitiesXML,res)
   }
 
   /**
@@ -76,7 +76,7 @@ class Account(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
     val holdingsXML: NodeSeq = xml \ "accountbalance" \ "accountholdings" \ "holding"
     var holds: Set[Holding] = Set()
     holdingsXML.foreach {
-      n: NodeSeq => holds += new Holding(n)
+      n: NodeSeq => holds += new Holding(n,res)
     }
     holds
   }

@@ -21,7 +21,7 @@ import scala.xml.NodeSeq
  * A model representing an Account's buying power generalizations
  * @param xml
  */
-class BuyingPower(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class BuyingPower(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   /**
    * @return Cash Available for Withdrawl

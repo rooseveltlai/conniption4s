@@ -15,7 +15,7 @@
  */
 package com.celexus.conniption
 
-import org.scribe.model.Verb
+import org.scribe.model.{Response, Verb}
 import xml._
 import com.celexus.conniption.model._
 
@@ -32,10 +32,11 @@ class ConniptionService(format: String = "xml") {
    * @return
    */
   def accounts: Set[Account] = {
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("accounts")).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("accounts"))
+    val xml: NodeSeq = XML.loadString(res.getBody)
     val accountsXML = xml \ "accounts" \ "accountsummary" \ "accountbalance"
     var accounts: Set[Account] = Set[Account]()
-    accountsXML.foreach(part => accounts += new Account(accountsXML))
+    accountsXML.foreach(part => accounts += new Account(accountsXML, res))
     accounts
   }
 
@@ -55,7 +56,8 @@ class ConniptionService(format: String = "xml") {
    * @return A map (accountId -> account balance)
    */
   def balances: Map[String, Double] = {
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("accounts/balances")).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("accounts/balances"))
+    val xml: NodeSeq = XML.loadString(res.getBody)
     val balanceXML: NodeSeq = xml \ "accountbalance"
     var balanceMap: Map[String, Double] = Map()
     balanceXML.foreach {
@@ -92,10 +94,11 @@ class ConniptionService(format: String = "xml") {
    * @return Set of Transactions for the given history parameters
    */
   def history(id: String, range: String = "all", transactions: String = "all"): Set[Transaction] = {
-    val transactionXML: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("accounts/___/history", id), Map("range" -> range, "transactions" -> transactions)).getBody) \ "transactions" \ "transaction"
+    val res: Response = tk.request(Verb.GET, buildURL("accounts/___/history", id), Map("range" -> range, "transactions" -> transactions))
+    val transactionXML: NodeSeq = XML.loadString(res.getBody) \ "transactions" \ "transaction"
     var transacts: Set[Transaction] = Set()
     transactionXML.foreach {
-      n: NodeSeq => transacts += new Transaction(n)
+      n: NodeSeq => transacts += new Transaction(n, res)
     }
     transacts
   }
@@ -115,11 +118,12 @@ class ConniptionService(format: String = "xml") {
    * @return Set of Account Holdings
    */
   def holdings(id: String): Set[Holding] = {
-    val xml: Node = XML.loadString(tk.request(Verb.GET, buildURL("accounts/___/holdings", id)).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("accounts/___/holdings", id))
+    val xml: Node = XML.loadString(res.getBody)
     val holdingsXML: NodeSeq = (xml \ "accountholdings" \ "holding")
     var holdings = Set[Holding]()
     holdingsXML.foreach {
-      n: Node => holdings += new Holding(n)
+      n: Node => holdings += new Holding(n, res)
     }
     holdings
   }
@@ -128,7 +132,7 @@ class ConniptionService(format: String = "xml") {
     var ords: Set[Order] = Set()
     accounts.foreach {
       a: Account =>
-        ords = ords++ orders(a.id)
+        ords = ords ++ orders(a.id)
     }
     ords
   }
@@ -139,11 +143,12 @@ class ConniptionService(format: String = "xml") {
    * @return A set of Account Orders
    */
   def orders(id: String): Set[Order] = {
-    val xml: Node = XML.loadString(tk.request(Verb.GET, buildURL("accounts/___/orders", id)).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("accounts/___/orders", id))
+    val xml: Node = XML.loadString(res.getBody)
     val orderXML: NodeSeq = (xml \ "orderstatus" \ "order")
     var orders = Set[Order]()
     orderXML.foreach {
-      n: NodeSeq => orders += new Order(n)
+      n: NodeSeq => orders += new Order(n, res)
     }
     orders
   }
@@ -155,7 +160,8 @@ class ConniptionService(format: String = "xml") {
    * @return A TradeKing Response
    */
   def placeOrder(id: String, fixml: String): TKResponse = {
-    new TKResponse(XML.loadString(tk.request(Verb.POST, buildURL("accounts/___/orders", id), payload = fixml).getBody))
+    val res: Response = tk.request(Verb.POST, buildURL("accounts/___/orders", id), payload = fixml)
+    new TKResponse(XML.loadString(res.getBody), res)
   }
 
   /**
@@ -165,7 +171,8 @@ class ConniptionService(format: String = "xml") {
    * @return a TradeKing response
    */
   def placePreview(id: String, fixml: String): TKResponse = {
-    new TKResponse(XML.loadString(tk.request(Verb.POST, buildURL("accounts/___/orders/preview", id), payload = fixml).getBody))
+    val res: Response = tk.request(Verb.POST, buildURL("accounts/___/orders/preview", id), payload = fixml)
+    new TKResponse(XML.loadString(res.getBody), res)
   }
 
   /**
@@ -173,7 +180,8 @@ class ConniptionService(format: String = "xml") {
    * @return Java date for the current Market Clock
    */
   def clock: java.util.Date = {
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("market/clock")).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("market/clock"))
+    val xml: NodeSeq = XML.loadString(res.getBody)
     val timeStamp: Long = (xml \ "unixtime").text.toLong
     new java.util.Date(timeStamp * 1000);
   }
@@ -187,11 +195,12 @@ class ConniptionService(format: String = "xml") {
   def quotes(symbols: Set[String], fids: Set[String] = Set()): Set[Quote] = {
     var map: Map[String, String] = Map("symbols" -> concat(symbols))
     if (fids nonEmpty) map += ("fids" -> concat(fids))
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.POST, buildURL("market/ext/quotes"), map).getBody)
+    val res: Response = tk.request(Verb.POST, buildURL("market/ext/quotes"), map)
+    val xml: NodeSeq = XML.loadString(res.getBody)
     var quotes: Set[Quote] = Set()
     val quotesXML: NodeSeq = (xml \ "quotes" \ "quote")
     quotesXML.foreach {
-      n: NodeSeq => quotes += new Quote(n)
+      n: NodeSeq => quotes += new Quote(n, res)
     }
     quotes
   }
@@ -210,11 +219,12 @@ class ConniptionService(format: String = "xml") {
     if (symbols nonEmpty) params += ("symbols" -> concat(symbols))
     if (startdate nonEmpty) params += ("startdate" -> startdate)
     if (enddate nonEmpty) params += ("enddate" -> enddate)
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("market/news/search"), params).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("market/news/search"), params)
+    val xml: NodeSeq = XML.loadString(res.getBody)
     var articleIds: Set[ArticleId] = Set()
     val idsXML: NodeSeq = (xml \ "articles" \ "article")
     idsXML.foreach {
-      n: NodeSeq => articleIds += new ArticleId(n)
+      n: NodeSeq => articleIds += new ArticleId(n, res)
     }
     articleIds
   }
@@ -232,8 +242,9 @@ class ConniptionService(format: String = "xml") {
    * @return The Article from the ArticleId
    */
   def news(idString: String): Article = {
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("market/news/___", idString)).getBody)
-    new Article(xml \ "article")
+    val res: Response = tk.request(Verb.GET, buildURL("market/news/___", idString))
+    val xml: NodeSeq = XML.loadString(res.getBody)
+    new Article(xml \ "article", res)
   }
 
   /**
@@ -251,11 +262,12 @@ class ConniptionService(format: String = "xml") {
     if (startdate nonEmpty) params += ("startdate" -> startdate)
     if (enddate nonEmpty) params += ("enddate" -> enddate)
     if (starttime nonEmpty) params += ("starttime" -> starttime)
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("market/timesales"), params).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("market/timesales"), params)
+    val xml: NodeSeq = XML.loadString(res.getBody)
     var quotes: Seq[Quote] = Seq()
     val quotesXML: NodeSeq = (xml \ "quotes" \ "quote")
     quotesXML.foreach {
-      n: NodeSeq => quotes = quotes.+:(new Quote(n))
+      n: NodeSeq => quotes = quotes.+:(new Quote(n, res))
     }
     quotes
   }
@@ -273,11 +285,12 @@ class ConniptionService(format: String = "xml") {
    * @return
    */
   def list(typ: String = "topgainers"): Seq[Quote] = {
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("market/toplists/" + typ)).getBody)
+    val res: Response = tk.request(Verb.GET, buildURL("market/toplists/" + typ))
+    val xml: NodeSeq = XML.loadString(res.getBody)
     var quotes: Seq[Quote] = Seq()
     val quotesXML: NodeSeq = (xml \ "quotes" \ "quote")
     quotesXML.foreach {
-      n: NodeSeq => quotes = quotes.+:(new Quote(n))
+      n: NodeSeq => quotes = quotes.+:(new Quote(n, res))
     }
     quotes
   }
@@ -287,8 +300,9 @@ class ConniptionService(format: String = "xml") {
    * @return Tradeking data for the User
    */
   def profile: Profile = {
-    val xml: NodeSeq = XML.loadString(tk.request(Verb.GET, buildURL("member/profile")).getBody)
-    new Profile(xml \ "userdata")
+    val res:Response = tk.request(Verb.GET, buildURL("member/profile"))
+    val xml: NodeSeq = XML.loadString(res.getBody)
+    new Profile(xml \ "userdata",res)
   }
 
   /**

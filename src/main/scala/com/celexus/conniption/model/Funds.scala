@@ -21,7 +21,7 @@ import scala.xml.NodeSeq
  *  Model representing all Funds for an Account
  * @param xml Underlying format, default XML
  */
-class Funds(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class Funds(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   def accruedInterest: Double = toDouble(ends("money/accruedinterest"))
 

@@ -22,7 +22,7 @@ import java.text.{SimpleDateFormat, DateFormat}
  * Model object for News Articles
  * @param xml Underlying format, default XML
  */
-class Article(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class Article(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   /**
    *

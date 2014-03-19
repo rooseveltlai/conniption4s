@@ -6,7 +6,7 @@ import java.text.{SimpleDateFormat, DateFormat}
 /**
  * Created by cam on 3/16/14.
  */
-class Quote(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class Quote(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   def avg100Day: Double = toDouble(ends("quote/adp_100"))
 

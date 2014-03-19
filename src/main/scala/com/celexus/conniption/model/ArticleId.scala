@@ -22,7 +22,7 @@ import java.text.{SimpleDateFormat, DateFormat}
  * Model representing an ArticleId
  * @param xml Underlying forrmat, default XML
  */
-class ArticleId(xml: NodeSeq) extends TKResponse(xml: NodeSeq, format = "xml") {
+class ArticleId(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
   /**
    * @return Article's Date

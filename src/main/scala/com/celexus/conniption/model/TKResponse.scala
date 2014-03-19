@@ -17,15 +17,17 @@ package com.celexus.conniption.model
 
 import scala.xml.{Node, NodeSeq}
 import com.celexus.conniption.XMLPathMap
+import org.scribe.model.Response
 
 /**
  * Most model elements extend TKResponse, it contains a Map [path, value] for XML responses
  * @param xml the incoming XML
  * @param format underlying format, XML supported
  */
-class TKResponse(val xml: NodeSeq, val format: String = "xml") {
+class TKResponse(val xml: NodeSeq, val res: Response, val format: String = "xml") {
 
   var properties: Map[String, String] = Map()
+
   if (format eq "xml") xml.foreach {
     n: Node => val m = new XMLPathMap(n)
       properties = properties ++ m.properties
@@ -43,4 +45,12 @@ class TKResponse(val xml: NodeSeq, val format: String = "xml") {
     if (filter isEmpty) ""
     else filter.head._2
   }
+
+  def limitUsed: Int = res.getHeader("X-RateLimit-Used").toInt
+
+  def limitTotal: Int = res.getHeader("X-RateLimit-Limit").toInt
+
+  def limitRemaining: Int = res.getHeader("X-RateLimit-Remaining").toInt
+
+  def limitExpire: java.util.Date = new java.util.Date(res.getHeader("X-RateLimit-Expire").toLong)
 }
