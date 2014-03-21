@@ -104,7 +104,7 @@ Search News
 val keywords = Set("debt")
 val symbols = Set("APPL") //optional
 val maxhits = 10 //optional 
-val articles: Set[ArticleId]srv.searchNews(keywords,symbols,maxhits) -> Set[ArticleId]
+val articles: Set[ArticleId] = srv.searchNews(keywords,symbols,maxhits) -> Set[ArticleId]
 ```
 
 Inflate a News Article
