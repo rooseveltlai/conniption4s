@@ -22,5 +22,4 @@ public class TradeKingAPI extends DefaultApi10a {
         return "https://developers.tradeking.com/oauth/authorize?oauth_token=%s";
     }
 
-
 }
