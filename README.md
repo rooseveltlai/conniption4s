@@ -193,11 +193,6 @@ Place an Order
 * [Quote](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Quote.scala)
 * [Transaction](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/model/Transaction.scala)
 
-## TODO
-
-* Tests!
-* Quote, FIXML Building
-
 ## License, Attribution, etc
 
 
