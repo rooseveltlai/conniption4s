@@ -140,6 +140,43 @@ Get History
 ```scala
 val hist :Seq[Transactions] = srv.history("1234567")
 ```
+
+Place an Order
+
+```scala
+   // User FIXMLOrder object
+   // Buying : Place a day order to buy 1 share of F at market price on account 12345678.
+     val o: String = new FIXMLOrder("12345678", "F").timInForce(TimeInForce.dayOrder).typ(OrderType.market).side(Side.buy).qty(1).toString
+     srv.placeOrder(acc.id, o)
+     
+  // Selling: Place a day order to sell 1 share of F at market price on account 12345678.
+   val o: String = new FIXMLOrder("12345678", "IBM").timInForce(TimeInForce.dayOrder).typ(OrderType.market).side(Side.sell).qty(1).toString
+    srv.placeOrder(acc.id, o)
+    
+  // Sell Short:Place a day order to sell short 1 share of F at $22.00 on account 12345678.
+    val o: String = new FIXMLOrder("12345678", "F").timInForce(TimeInForce.dayOrder).typ(OrderType.limit).side(Side.sellShort).qty(1).price(22).toString
+     srv.placeOrder(acc.id, o)
+     
+ // Buy to Cover : Place a day order to buy to cover 1 share of F at $13 on account 12345678.
+    val o: String = new FIXMLOrder("12345678", "F").timInForce(TimeInForce.dayOrder).typ(OrderType.limit).side(Side.buyToCover).qty(1).price(13).toString
+    srv.placeOrder(acc.id, o)
+    
+ // Buy Trailing Stop (with dollar value): Place a .50 buy trailing stop on 1 share of IBM (market order will trigger if current price of IBM rises by .50 for current price. If IBM moves down, trigger price will also move down.*/
+    val o: String = new FIXMLOrder("12345678", "IBM").timInForce(TimeInForce.dayOrder).typ(OrderType.trailingStop).stopAt(StopType.dollarValue(0.50)).side(Side.buy).qty(1).to
+   srv.placeOrder(acc.id, o)
+   
+ // Buy Trailing Stop (with percentage):  Place a 5% buy trailing stop on 1 share of COST (Note: OfstTyp="1" for percentage trailing stop vs. OfstTyp="0" for price value trailing stop).
+    val o: String = new FIXMLOrder("12345678", "COST").timInForce(TimeInForce.dayOrder).typ(OrderType.trailingStop).stopAt(StopType.percentage(5)).side(Side.buy).qty(1).toString
+    srv.placeOrder(acc.id, o)
+    
+ // Sell Trailing Stop (with dollar value):  Place a 2.00 sell trailing stop on 1 share of F. (NOTICE THE NEGATIVE)
+    val o: String = new FIXMLOrder("12345678", "F").timInForce(TimeInForce.dayOrder).typ(OrderType.trailingStop).stopAt(StopType.dollarValue(-2.0)).side(Side.sell).qty(1).toString
+    srv.placeOrder(acc.id, o)
+  
+  
+ 
+    
+```
    
 .... Plus many more! Checkout the TradeKing documentation, I've implemented what is reasonable...
 
