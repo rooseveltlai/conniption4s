@@ -47,7 +47,7 @@ I'm still new to SBT and deploying scala projects to maven central, check back w
 
 ### [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/ConniptionService.scala)
 
-The [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/ConniptionService.scala) is your goto for access to the TradeKing API. Most methods will return a single, sequence or set of given model elements defined beloy
+The [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/ConniptionService.scala) is your goto for access to the TradeKing API. Most methods will return a single, sequence or set of given model elements defined below
 
 #### Examples
 
