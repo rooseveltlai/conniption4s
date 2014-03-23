@@ -49,6 +49,10 @@ Use the maven clean install directive to compile and make sure everythng works. 
 </dependency>
 ```
 
+```ivy
+com.celexus % conniption4s % 1.0.1
+```
+
 ## Usage
 
 ### [ConniptionService](https://github.com/Ccook/conniption4s/blob/master/src/main/scala/com/celexus/conniption/ConniptionService.scala)
