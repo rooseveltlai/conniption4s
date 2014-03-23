@@ -4,9 +4,10 @@
     <groupId>com.celexus</groupId>
     <artifactId>conniption4s</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
-    <name>A missing tradeking API for Scala</name>
+    <version>1.0.1</version>
+    <name>Conniption4s - A missing tradeking API for Scala</name>
     <url>http://www.github.com/ccook</url>
+    <description>A missing tradeking API for Scala</description>
     <developers>
         <developer>
             <id>ckcook</id>
