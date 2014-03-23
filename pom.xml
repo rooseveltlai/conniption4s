@@ -4,7 +4,7 @@
     <groupId>com.celexus</groupId>
     <artifactId>conniption4s</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>A missing tradeking API for Scala</name>
     <url>http://www.github.com/ccook</url>
     <developers>
@@ -27,10 +27,17 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git@github.com:ccook/conniption.git</connection>
-        <url>scm:git:git@github.com:ccook/conniption.git</url>
+        <connection>scm:git:git@github.com:ccook/conniption4s.git</connection>
+        <url>scm:git:git@github.com:ccook/conniption4s.git</url>
         <developerConnection>scm:git:git@github.com:ccook/conniption4s.git</developerConnection>
     </scm>
+    <distributionManagement>
+        <repository>
+            <id>bintray-ckcook-maven-Conniption4s</id>
+            <name>ckcook-maven-Conniption4s</name>
+            <url>https://api.bintray.com/maven/ckcook/maven/Conniption4s</url>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.scribe</groupId>
