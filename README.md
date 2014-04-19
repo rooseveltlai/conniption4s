@@ -41,7 +41,17 @@ Use the maven clean install directive to compile and make sure everythng works. 
 
 ## Maven / SBT
 
-I'm still new to SBT and deploying scala projects to maven central, check back when I get this sorted!
+```xml
+<dependency>
+   <groupId>com.celexus</groupId>
+   <artifactId>conniption4s</artifactId>
+   <version>1.0.1</version>
+</dependency>
+```
+
+```ivy
+com.celexus % conniption4s % 1.0.1
+```
 
 ## Usage
 
