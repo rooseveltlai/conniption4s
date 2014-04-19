@@ -3,6 +3,8 @@ conniption4s
 
 A missing TradeKing API for Scala
 
+[![Build Status](https://travis-ci.org/Ccook/conniption4s.svg?branch=master)](https://travis-ci.org/Ccook/conniption4s)
+
 ## Getting an API Key from TradeKing
 
 * [Visit the TradeKing Developers Website](https://developers.tradeking.com/applications/)  
