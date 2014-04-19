@@ -1,0 +1,9 @@
+language: java
+env: 
+  global: 
+  - secure: L0a3Yt32VKT2IIR6dmMtf6WiIWBx8T3RlYVnz78B9WCggfvtdl7B/aeAFds900KiJyKSgJE7sMiHLcBsNCGiok117t5YgI5BuDz8WkJjuzd8aowmcVA3vfWFFWaXd1F9yHd9CUfhnayVsWv4BFIbZYxit60IbX/y24QQNd/21ks=
+  - secure: hsbXsF3nG67LvIijlEtjQdZqARo7GWRWqhwrVmVQj3sVkkQ+HLUHotYhm73/SA8FXZ9Mlh2zzAdFnMQPOvgXvkOfVnMVr2rs46wSWSTfeiwjA17R8FFXDPZBcCtoFGPBwh5KsndAOgFbl57sklnbSqV+iNzAUO+pERErGcmKr+k=
+  - secure: HqTeQAuW6pS5KNo7SIl6V2NpxG/t4eaOP9sbz08zmEbeYnDwPlEPtjd4TcT+AtxT+sYwESSzqr7zaDdryhLh68iY4HXd0+dr9SDgMarHzkzWZXJ4UNHZYmaEmMUgFa6P84CKjfvooDCXP0a3lNUc+ZRLIWLckC2H+yRH1NFtzyM=
+  - secure: CXqwyZ/yoXpK2nsXqH4Z/0LMoCPjOCWsAj3e80RhPobq/Z/HLeeyhQC2xbixJ6rMDa7Mi/YVHI36AEVNerqrV97SMNBB8pNKW3n1Cps7+mnxRoTyqFicueDPiOAkXuTtfqNhK7+nVpmf3yXhw8zWJsgFZuLagy3WYaUJYDRcGTY=
+jdk: 
+  - openjdk6
