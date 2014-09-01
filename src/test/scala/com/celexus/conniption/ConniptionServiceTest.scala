@@ -56,6 +56,20 @@ class ConniptionServiceTest extends AssertionsForJUnit {
     }
   }
 
+  @Test
+  def news = {
+    val news: Set[ArticleId] = srv.searchNews(keywords = Set("debt"))
+    news.foreach {
+      id: ArticleId =>
+        val article: Article = srv.news(id)
+        assertNotNull(article.body)
+        assertNotNull(article.date)
+        assertNotNull(article.headline)
+        assertNotNull(article.id)
+
+    }
+  }
+
   @Test def balances = {
     val balances: Map[String, Double] = srv.balances
     assertValued("Balances", balances)
