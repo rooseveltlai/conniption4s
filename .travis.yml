@@ -7,3 +7,5 @@ env:
   - secure: CXqwyZ/yoXpK2nsXqH4Z/0LMoCPjOCWsAj3e80RhPobq/Z/HLeeyhQC2xbixJ6rMDa7Mi/YVHI36AEVNerqrV97SMNBB8pNKW3n1Cps7+mnxRoTyqFicueDPiOAkXuTtfqNhK7+nVpmf3yXhw8zWJsgFZuLagy3WYaUJYDRcGTY=
 jdk: 
   - openjdk6
+after_success:
+  - mvn clean cobertura:cobertura coveralls:cobertura
