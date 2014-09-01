@@ -11,9 +11,11 @@ class ConniptionServiceTest extends AssertionsForJUnit {
   @Test def accounts = {
     val accounts: Set[Account] = srv.accounts
     assertValued("Accounts Set", accounts)
+    var id = ""
     accounts.foreach {
       a: Account =>
         assertValued("Account ID", a.id)
+        id = a.id
         assertValued("Account Fedcall", a.fedcall)
         assertValued("Account Housecall", a.housecall)
         assertValued("Account Value", a.value)
@@ -24,6 +26,33 @@ class ConniptionServiceTest extends AssertionsForJUnit {
         assertValued("Account Securities Short Stocks", sec.shortstocks)
         assertValued("Account Securities Stocks", sec.stocks)
         assertValued("Account Securities Total", sec.total)
+    }
+    val acOption: Option[Account] = srv.account(id)
+    if (acOption.isDefined) {
+      val acc: Account = acOption.get
+      assertNotNull(acc.buyingPower)
+      assertNotNull(acc.fedcall)
+      assertNotNull(acc.funds)
+      assertNotNull(acc.holdings)
+      assertNotNull(acc.housecall)
+      assertNotNull(acc.securities)
+      assertNotNull(acc.value)
+    }
+    assertNotNull(srv.balance(id))
+    assertNotNull(srv.status)
+    val transactions: Set[Transaction] = srv.history(id)
+    transactions.foreach {
+      t: Transaction =>
+        assertNotNull(t.activity)
+        assertNotNull(t.amount)
+        assertNotNull(t.comission)
+        assertNotNull(t.date)
+        assertNotNull(t.description)
+        assertNotNull(t.fee)
+        assertNotNull(t.price)
+        assertNotNull(t.quantity)
+        assertNotNull(t.secfee)
+        assertNotNull(t.symbol)
     }
   }
 
