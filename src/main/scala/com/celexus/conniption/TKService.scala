@@ -19,11 +19,12 @@ import org.scribe.builder._
 import org.scribe.oauth.OAuthService
 import org.scribe.model._
 
+
 /**
  * A Helper class to perform OAuth transactions to Tradeking (TradeKingAPI is in src/java)
  */
 class TKService {
-  val service: OAuthService = new ServiceBuilder().provider(new com.celexus.conniption.TradeKingAPI().getClass())
+  val service: OAuthService = new ServiceBuilder().provider(classOf[TradeKingAPI])
     .apiKey(ConniptionConstants.API_KEY).apiSecret(ConniptionConstants.API_SECRET).signatureType(SignatureType.Header).build()
 
   /**
