@@ -33,11 +33,6 @@ class TKService {
    */
   def token: Token = new Token(ConniptionConstants.ACCESS_TOKEN, ConniptionConstants.ACCESS_TOKEN_SECRET)
 
-  /**
-   * The Authorization URL
-   * @return
-   */
-  def authURL: String = service.getAuthorizationUrl(token)
 
   /**
    * Make a OAuth request
@@ -51,12 +46,19 @@ class TKService {
     val req: OAuthRequest = new OAuthRequest(v, url)
     parameters.foreach(p => req.addQuerystringParameter(p._1, p._2))
     if (!payload.eq(null)) {
-      req.addHeader("Content-Length", payload.length.toString)
-      req.addHeader("Content-Type", "text/xml")
-      req.addHeader("TKI_OVERRIDE","true")
-      req.addPayload(payload)
+      TKService.addPayloadToRequest(req, payload)
     }
     service.signRequest(token, req)
     req.send
+  }
+}
+
+object TKService {
+
+  def addPayloadToRequest(req: OAuthRequest, payload: String) = {
+    req.addHeader("Content-Length", payload.length.toString)
+    req.addHeader("Content-Type", "text/xml")
+    req.addHeader("TKI_OVERRIDE", "true")
+    req.addPayload(payload)
   }
 }

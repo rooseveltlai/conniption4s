@@ -4,6 +4,7 @@ import org.scalatest.junit.AssertionsForJUnit
 import org.junit._
 import com.celexus.conniption.model._
 import org.junit.Assert._
+import org.scribe.model.{Verb, OAuthRequest}
 
 class ConniptionServiceTest extends AssertionsForJUnit {
   private val srv: ConniptionService = new ConniptionService()
@@ -79,6 +80,9 @@ class ConniptionServiceTest extends AssertionsForJUnit {
     val news: Set[ArticleId] = srv.searchNews(keywords = Set("debt"))
     news.foreach {
       id: ArticleId =>
+        assertNotNull(id.date)
+        assertNotNull(id.headline)
+        assertNotNull(id.id)
         val article: Article = srv.news(id)
         assertNotNull(article.body)
         assertNotNull(article.date)
@@ -204,6 +208,13 @@ class ConniptionServiceTest extends AssertionsForJUnit {
   }
 
   @Test def version = assertEquals("Version", srv.version, "1.0-RC1")
+
+  @Test def tkService = {
+    val p = "hello"
+    val req: OAuthRequest = new OAuthRequest(Verb.GET, "http://www.example.com")
+    TKService.addPayloadToRequest(req, p)
+    assertEquals(p, req.getBodyContents)
+  }
 
   private def assertValued(err: String, a: Any) = {
     assertNotNull(err + " (is null)", a)
