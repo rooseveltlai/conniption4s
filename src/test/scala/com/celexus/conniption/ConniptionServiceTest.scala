@@ -209,6 +209,20 @@ class ConniptionServiceTest extends AssertionsForJUnit {
 
   @Test def version = assertEquals("Version", srv.version, "1.0-RC1")
 
+  @Test def ordersNulled = {
+    srv.orders.foreach {
+      o: Order =>
+        assertNotNull(o.commission)
+        assertNotNull(o.marginRequirement)
+        assertNotNull(o.principal)
+        assertNotNull(o.secfee)
+        assertNotNull(o.limitExpire)
+        assertNotNull(o.limitRemaining)
+        assertNotNull(o.limitTotal)
+        assertNotNull(o.limitUsed)
+    }
+  }
+
   @Test def tkService = {
     val p = "hello"
     val req: OAuthRequest = new OAuthRequest(Verb.GET, "http://www.example.com")
