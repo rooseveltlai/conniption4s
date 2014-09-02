@@ -32,7 +32,17 @@ class ConniptionServiceTest extends AssertionsForJUnit {
       val acc: Account = acOption.get
       assertNotNull(acc.buyingPower)
       assertNotNull(acc.fedcall)
-      assertNotNull(acc.funds)
+      val fs: Funds = acc.funds
+      assertNotNull(fs)
+      assertNotNull(fs.accruedInterest)
+      assertNotNull(fs.cashAvailable)
+      assertNotNull(fs.cashTotal)
+      assertNotNull(fs.fundsYield)
+      assertNotNull(fs.marginBalance)
+      assertNotNull(fs.moneyMarketFundBalance)
+      assertNotNull(fs.total)
+      assertNotNull(fs.unclearedDeposits)
+      assertNotNull(fs.unsettled)
       assertNotNull(acc.holdings)
       assertNotNull(acc.housecall)
       assertNotNull(acc.securities)
