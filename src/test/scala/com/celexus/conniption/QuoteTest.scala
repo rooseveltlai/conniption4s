@@ -67,7 +67,7 @@ class QuoteTest extends AssertionsForJUnit {
         assertNotNull(q.prevLow)
         assertNotNull(q.prevOpen)
         assertNotNull(q.prevTradeDate)
-        assertNotNull(q.prevVolume)
+        assertNotNull(q.prevTotalVolume)
         assertNotNull(q.securityClass)
         assertNotNull(q.symbol)
         assertNotNull(q.timestamp)
