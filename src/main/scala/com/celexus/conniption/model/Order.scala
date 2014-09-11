@@ -7,12 +7,28 @@ import scala.xml.NodeSeq
  */
 class Order(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
+  /**
+   * Estimated commission for this order
+   * @return
+   */
   def commission: Double = toDouble(ends("estcommission"))
 
+  /**
+   * Estimated margin requirement for trade (for margin accounts)
+   * @return
+   */
   def marginRequirement: Double = toDouble(ends("marginrequirement"))
 
+  /**
+   * Estimated total cost (positive) or proceeds (negative) from order.
+   * @return
+   */
   def principal: Double = toDouble(ends("principal"))
 
+  /**
+   * Estimate of any SEC sale fee to be assessed on the order.
+   * @return
+   */
   def secfee: Double = toDouble(ends("secfee"))
 
   //EXPERIMENTAL!!

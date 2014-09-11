@@ -33,7 +33,7 @@ class ConniptionServiceTest extends AssertionsForJUnit {
       val acc: Account = acOption.get
       val power: BuyingPower = acc.buyingPower
       assertNotNull(power)
-      assertNotNull(power.cashAvailableForWithdrawl)
+      assertNotNull(power.cashAvailableForWithdrawal)
       assertNotNull(power.dayStartDayTrading)
       assertNotNull(power.dayStartStock)
       assertNotNull(power.daytrading)

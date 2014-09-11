@@ -26,7 +26,7 @@ class BuyingPower(xml: NodeSeq, res: org.scribe.model.Response) extends TKRespon
   /**
    * @return Cash Available for Withdrawl
    */
-  def cashAvailableForWithdrawl: Double = toDouble(ends("buyingpower/cashavailableforwithdrawal"))
+  def cashAvailableForWithdrawal: Double = toDouble(ends("buyingpower/cashavailableforwithdrawal"))
 
   /**
    * @return Day Trading Buying Power

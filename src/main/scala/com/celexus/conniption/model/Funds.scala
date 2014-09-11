@@ -18,26 +18,62 @@ package com.celexus.conniption.model
 import scala.xml.NodeSeq
 
 /**
- *  Model representing all Funds for an Account
+ * Model representing all Funds for an Account
  * @param xml Underlying format, default XML
  */
 class Funds(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(xml: NodeSeq, res: org.scribe.model.Response, format = "xml") {
 
+  /**
+   * Amount of any accrued interest on the account
+   * @return
+   */
   def accruedInterest: Double = toDouble(ends("money/accruedinterest"))
 
+  /**
+   * Cash
+   * @return
+   */
   def cashTotal: Double = toDouble(ends("money/cash"))
 
+  /**
+   * Cash available
+   * @return
+   */
   def cashAvailable: Double = toDouble(ends("money/cashavailable"))
 
+  /**
+   * Margin balance (- indicates debit balance, + indicates credit balance)
+   * @return
+   */
   def marginBalance: Double = toDouble(ends("money/marginbalance"))
 
+  /**
+   * Money market fund
+   * @return
+   */
   def moneyMarketFundBalance: Double = toDouble(ends("money/mmf"))
 
+  /**
+   * Total cash balance
+   * @return
+   */
   def total: Double = toDouble(ends("money/total"))
 
+  /**
+   * Uncleared deposits
+   * @return
+   */
   def unclearedDeposits: Double = toDouble(ends("money/uncleareddeposits"))
 
+  /**
+   * Unsettled funds
+   * @return
+   */
   def unsettled: Double = toDouble(ends("money/unsettledfunds"))
 
+  /**
+   * Yield
+   * @return
+   */
   def fundsYield: Double = toDouble(ends("money/yield"))
 }
