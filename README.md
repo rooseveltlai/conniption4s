@@ -53,7 +53,7 @@ Use the maven clean install directive to compile and make sure everythng works. 
 ```
 
 ```ivy
-com.celexus % conniption4s % 1.0.1
+com.celexus % conniption4s % 1.0.4
 ```
 
 ## Usage
