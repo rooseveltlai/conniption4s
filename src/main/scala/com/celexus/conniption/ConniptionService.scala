@@ -187,6 +187,12 @@ class ConniptionService(format: String = "xml") {
     new java.util.Date(timeStamp * 1000);
   }
 
+  def marketClock: MarketClock = {
+    val res: Response = tk.request(Verb.GET, buildURL("market/clock"))
+    val xml: NodeSeq = XML.loadString(res.getBody)
+    new MarketClock(xml, res)
+  }
+
   /**
    * Access to Quotes
    * @param symbols A set of symbols to get a quote for
@@ -301,9 +307,9 @@ class ConniptionService(format: String = "xml") {
    * @return Tradeking data for the User
    */
   def profile: Profile = {
-    val res:Response = tk.request(Verb.GET, buildURL("member/profile"))
+    val res: Response = tk.request(Verb.GET, buildURL("member/profile"))
     val xml: NodeSeq = XML.loadString(res.getBody)
-    new Profile(xml \ "userdata",res)
+    new Profile(xml \ "userdata", res)
   }
 
   /**
