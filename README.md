@@ -48,12 +48,12 @@ Use the maven clean install directive to compile and make sure everythng works. 
 <dependency>
    <groupId>com.celexus</groupId>
    <artifactId>conniption4s</artifactId>
-   <version>1.0.1</version>
+   <version>1.0.4</version>
 </dependency>
 ```
 
 ```ivy
-com.celexus % conniption4s % 1.0.1
+com.celexus % conniption4s % 1.0.4
 ```
 
 ## Usage
