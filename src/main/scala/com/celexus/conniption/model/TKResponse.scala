@@ -18,6 +18,7 @@ package com.celexus.conniption.model
 import scala.xml.{Node, NodeSeq}
 import com.celexus.conniption.XMLPathMap
 import org.scribe.model.Response
+import java.util.Date
 
 /**
  * Most model elements extend TKResponse, it contains a Map [path, value] for XML responses
@@ -46,11 +47,39 @@ class TKResponse(val xml: NodeSeq, val res: Response, val format: String = "xml"
     else filter.head._2
   }
 
-  def limitUsed: Int = res.getHeader("X-RateLimit-Used").toInt
+  def limitUsed: Int = {
+    val header = res.getHeader("X-RateLimit-Used")
+    if (header != null) {
+      header.toInt
+    } else {
+      0
+    }
+  }
 
-  def limitTotal: Int = res.getHeader("X-RateLimit-Limit").toInt
+  def limitTotal: Int = {
+    val header = res.getHeader("X-RateLimit-Limit")
+    if (header != null) {
+      header.toInt
+    } else {
+      10000
+    }
+  }
 
-  def limitRemaining: Int = res.getHeader("X-RateLimit-Remaining").toInt
+  def limitRemaining: Int = {
+    val header = res.getHeader("X-RateLimit-Remaining")
+    if (header != null) {
+      header.toInt
+    } else {
+      10000
+    }
+  }
 
-  def limitExpire: java.util.Date = new java.util.Date(res.getHeader("X-RateLimit-Expire").toLong)
+  def limitExpire: java.util.Date = {
+    val header = res.getHeader("X-RateLimit-Expire")
+    if (header != null) {
+      new java.util.Date(header.toLong)
+    } else {
+      new Date()
+    }
+  }
 }
