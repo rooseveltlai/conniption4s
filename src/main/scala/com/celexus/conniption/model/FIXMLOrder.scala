@@ -77,7 +77,7 @@ class FIXMLOrder(val accId: String, val symbol: String) {
 
   private[this] def instrumentParameters: Map[String, String] = {
     var m: Map[String, String] = Map()
-    m += "SecType" -> "CS"
+    m += "SecTyp" -> "CS"
     m += "Sym" -> symbol.toUpperCase
     m
   }
