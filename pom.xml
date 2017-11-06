@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.celexus</groupId>
-    <artifactId>conniption4s</artifactId>
+    <artifactId>conniption4s-roo</artifactId>
     <packaging>jar</packaging>
     <version>1.0.6</version>
     <name>Conniption4s - A missing tradeking API for Scala</name>
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <version>2.10.0</version>
+            <version>2.10.3</version>
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
