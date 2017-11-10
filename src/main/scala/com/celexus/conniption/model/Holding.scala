@@ -24,25 +24,25 @@ class Holding(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(x
    * @return
    */
   //TODO FIXME
-  def holdingType: String = ends("holding/displaydata/accounttype")
+  def holdingType: String = ends("holding/accounttype")
 
   /**
    * Holding asset class type
    * @return
    */
-  def assetClass: String = ends("holding/displaydata/assetclass")
+  def assetClass: String = ends("holding/instrument/sectyp")
 
   /**
    * Instrument description
    * @return
    */
-  def description: String = ends("holding/displaydata/desc")
+  def description: String = ends("holding/instrument/desc")
 
   /**
    * Holding underlying symbol
    * @return
    */
-  def symbol: String = ends("holding/displaydata/symbol")
+  def symbol: String = ends("holding/instrument/sym")
 
   /**
    * Holding cost basis

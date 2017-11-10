@@ -73,7 +73,7 @@ class Account(xml: NodeSeq, res: org.scribe.model.Response) extends TKResponse(x
    * @return A Set of Holdings object to describe holdings the account has
    */
   def holdings: Set[Holding] = {
-    val holdingsXML: NodeSeq = xml \ "accountholdings" \ "holding"
+    val holdingsXML: NodeSeq = (xml \ "accountholdings" \ "holding")
     var holds: Set[Holding] = Set()
     holdingsXML.foreach {
       n: NodeSeq => holds += new Holding(n,res)
