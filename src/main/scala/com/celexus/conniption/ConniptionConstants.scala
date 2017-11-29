@@ -20,8 +20,8 @@ package com.celexus.conniption
  */
 object ConniptionConstants {
 
-  val API_KEY: String = System.getenv("API_KEY")
-  val API_SECRET: String = System.getenv("API_SECRET")
-  val ACCESS_TOKEN: String = System.getenv("ACCESS_TOKEN")
-  val ACCESS_TOKEN_SECRET: String = System.getenv("ACCESS_TOKEN_SECRET")
+  val API_KEY: String = System.getProperty("API_KEY")
+  val API_SECRET: String = System.getProperty("API_SECRET")
+  val ACCESS_TOKEN: String = System.getProperty("ACCESS_TOKEN")
+  val ACCESS_TOKEN_SECRET: String = System.getProperty("ACCESS_TOKEN_SECRET")
 }
